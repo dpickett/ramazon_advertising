@@ -18,6 +18,6 @@ module Ramazon
 
     element :total_results, Integer, :tag => 'TotalResults'
     element :total_pages, Integer, :tag => 'TotalPages'
-    has_many :products, Ramazon::Product    
+    element :products, Ramazon::Product, :tag => "Item", :parser => :sparse, :raw => true
   end
 end
