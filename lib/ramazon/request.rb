@@ -9,10 +9,7 @@ module Ramazon
 
     def submit
       resp = self.class.get(signed_url)
-      require "ruby-debug"
-      debugger
-
-      resp
+      resp.body
     end
 
     #use this if any type of caching is desired (TBD)

@@ -22,5 +22,6 @@ require "ramazon/configuration"
 require "ramazon/request"
 
 require "ramazon/product"
+require "ramazon/product_collection"
 
 configatron.ramazon.locale = :us
