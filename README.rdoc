@@ -1,6 +1,12 @@
 = ramazon_advertising
 
-Description goes here.
+Ruby + Amazon Advertising == Car RAmazon_Advertising
+
+Ruh roh' Rorge it's an object oriented approach to Amazon's overly complicated product api that has a new name every 2 weeks. 
+
+Complete with the ability to use nokogiri selectors for results
+
+Currently only supports product search and retrieval. More soon!
 
 == Note on Patches/Pull Requests
  
