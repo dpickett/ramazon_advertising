@@ -1,4 +1,5 @@
 module Ramazon
+  #the object used to prepare and submit requests to amazon
   class Request
     include HTTParty
     attr_accessor :options
@@ -61,15 +62,6 @@ module Ramazon
         :version => "2009-07-01",
         :AWSAccessKeyId => Ramazon::Configuration.access_key
       }
-    end
-
-    def service_url
-      country = opts.delete(:country)
-      country = (country.nil?) ? "us" : country
-      url = SERVICE_URLS[country.to_sym]
-
-      raise AmazonAssociate::RequestError, "Invalid country \"#{country}\"" unless url
-      url
     end
   end
 end

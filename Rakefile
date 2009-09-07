@@ -64,3 +64,19 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+begin
+  require "YARD"
+  if File.exist?('VERSION.yml')
+    config = YAML.load(File.read('VERSION.yml'))
+    version = "#{config[:major]}.#{config[:minor]}.#{config[:patch]}"
+  else
+    version = ""
+  end
+
+  YARD::Rake::YardocTask.new do |t|
+  end
+rescue LoadError
+
+end
+
+
