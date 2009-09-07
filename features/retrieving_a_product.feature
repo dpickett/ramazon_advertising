@@ -9,7 +9,15 @@ Feature: Retrieving a product
 
     When I try to find the asin "B000NU2CY4"
     Then I should get a product
-    And the product should have the "name" "Gladiator [Blu-ray]"
-    And the product should have a "price"
+    And the product should have the "title" "Gladiator [Blu-ray]"
+    And the product should have a "manufacturer"
+    And the product should have a "product_group"
+    And the product should have a "sales_rank"
+    And the product should have a "large_image"
+    And the product should have a "list_price"
+    And the product should have a "upc"
+    And the product should have a "lowest_new_price"
+    And the product should have a "new_count"
+    And the product should have a "used_count"
 
   

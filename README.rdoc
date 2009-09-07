@@ -1,12 +1,25 @@
 = ramazon_advertising
 
-Ruby + Amazon Advertising == Car RAmazon_Advertising
+Ruby + Amazon Advertising == Car RAmazon_Advertising - Say Car RAmazon_Advertising!
 
 Ruh roh' Rorge it's an object oriented approach to Amazon's overly complicated product api that has a new name every 2 weeks. 
 
 Complete with the ability to use nokogiri selectors for results
 
-Currently only supports product search and retrieval. More soon!
+Currently only supports product search and retrieval. Requests are signed properly. More soon!
+
+  configatron.ramazon.access_key = "Your Access Key"
+  configatron.ramazon.secret_key = "Your Secret Key"
+
+  @products = Ramazon::Product.find(:item_id => "B000NU2CY4", :response_group => "Medium")
+  @products[0].title
+  @products[0].asin
+  @products[0].upc
+  @products[0].large_image.url
+  @products[0].url
+
+  #you can also use a nokogiri search string to get elements that don't have built-in accessors
+  @products[0].get("ItemAttributes Actor").collect{|a| a.content}
 
 == Note on Patches/Pull Requests
  

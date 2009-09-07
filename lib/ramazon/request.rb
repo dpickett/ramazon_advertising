@@ -27,7 +27,7 @@ module Ramazon
       self.options[:timestamp] = Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S")
       encoded_param_strings = []
       sorted_params.each do |p|
-        encoded_param_strings << "#{p[0]}=#{CGI::escape(p[1])}"
+        encoded_param_strings << "#{p[0]}=#{CGI::escape(p[1].to_s)}"
       end
       string_to_sign = 
 "GET

@@ -17,10 +17,14 @@ require "active_support/inflector"
 
 require "ramazon/rails_additions"
 
+require "ramazon/abstract_element"
+
 require "ramazon/signatory"
 require "ramazon/configuration"
 require "ramazon/request"
 
+require "ramazon/image"
+require "ramazon/price"
 require "ramazon/product"
 require "ramazon/product_collection"
 
