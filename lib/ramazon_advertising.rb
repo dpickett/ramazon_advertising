@@ -21,6 +21,7 @@ require "ramazon/abstract_element"
 
 require "ramazon/signatory"
 require "ramazon/configuration"
+require "ramazon/error"
 require "ramazon/request"
 
 require "ramazon/image"

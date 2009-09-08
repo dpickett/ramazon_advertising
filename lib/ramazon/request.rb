@@ -9,8 +9,23 @@ module Ramazon
     end
 
     def submit
-      resp = self.class.get(signed_url)
-      resp.body
+      @response = self.class.get(signed_url)
+      if valid?
+        @response.body
+      else
+        raise self.errors[0], "The following response errors were returned: #{self.errors.collect{|e| e.to_s}}" 
+      end
+    end
+
+    # Error checking for responses (will return true if errors are present)
+    # @returns [boolean] whether the response yielded errors
+    def valid?
+      @response && errors.empty?
+    end
+
+    #errors returned from amazon
+    def errors
+      @errors ||= Ramazon::Error.parse(@response.body) || []
     end
 
     #use this if any type of caching is desired (TBD)

@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__) + '..', '..', 'lib'))
-require 'ramazon_advertising'
+require 'lib/ramazon_advertising'
 
 require 'spec/expectations'
 

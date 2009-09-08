@@ -89,6 +89,11 @@ module Ramazon
       options = args.extract_options!
       if options[:item_id]
         item_lookup(options[:item_id], options)
+      else
+        options[:operation] ||= "ItemSearch"
+        options[:search_index] ||= "Blended"
+        res = Ramazon::Request.new(options).submit
+        Ramazon::ProductCollection.create_from_results(options[:page] || 1,options[:per_page] || 10,res)
       end
     end
 

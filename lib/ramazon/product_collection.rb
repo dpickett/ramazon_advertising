@@ -4,6 +4,7 @@ module Ramazon
  
     def self.create_from_results(page, per_page, body)
       results = Items.parse(body, {})[0]
+      debugger
       col = create(page, per_page, results.total_results || 0) do |pager|
         pager.replace(results.products)
       end
