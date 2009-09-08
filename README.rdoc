@@ -8,7 +8,7 @@ Complete with the ability to use nokogiri selectors for results
 
 Currently only supports product search and retrieval. Requests are signed properly. More soon!
 
-  Ramazon::Configuration.ramazon.access_key = "Your Access Key"
+  Ramazon::Configuration.access_key = "Your Access Key"
   Ramazon::Configuration.secret_key = "Your Secret Key"
 
   @products = Ramazon::Product.find(:item_id => "B000NU2CY4", :response_group => "Medium")
