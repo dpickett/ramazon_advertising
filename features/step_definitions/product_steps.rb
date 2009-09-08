@@ -3,9 +3,15 @@ When /^I try to find the asin "([^\"]*)"$/ do |asin|
   @product = @products[0]
 end
 
-When /^I try to search for the "([^\"]*)" of "([^\"]*)"$/ do |option, value|
+Given /^I am searching with the "([^\"]*)" of "([^\"]*)"$/ do |attr, value|
+  @search_options ||= {}
+  @search_options[attr] = value
+end
+
+When /^I perform the product search$/ do
   begin
-    @products = Ramazon::Product.find(option.to_sym => value)
+    @search_options ||= {}
+    @products = Ramazon::Product.find(@search_options)
   rescue Ramazon::Error => e
     @error = e
   end

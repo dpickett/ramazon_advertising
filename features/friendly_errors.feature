@@ -9,7 +9,7 @@ Feature: Friendly errors
     And I have a valid secret key
 
   Scenario: I don't specify a keyword for search
-    When I try to search for the "keyword" of ""
+    When I perform the product search
     Then I should get an error
     And the error should have a "code" of "AWS.MinimumParameterRequirement"
     And the error should have a "message"

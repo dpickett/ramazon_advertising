@@ -7,6 +7,8 @@ Feature: Search for products
     Given I have a valid access key
     And I have a valid secret key
 
-    When I try to search for the "search_index" of "DVD"
+    Given I am searching with the "search_index" of "DVD"
+    And I am searching with the "browse_node" of "130"
+    When I perform the product search
     Then I should get a list of products
     And each product should have the "product_group" "DVD"
