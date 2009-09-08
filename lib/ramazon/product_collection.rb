@@ -4,9 +4,10 @@ module Ramazon
  
     def self.create_from_results(page, per_page, body)
       results = Items.parse(body, {})[0]
-      col = create(page, per_page, results.total_results || 0) do |pager|
+      col = create(page, 10, results.total_results || 0) do |pager|
         pager.replace(results.products)
       end
+      
       col
     end
     
@@ -18,6 +19,9 @@ module Ramazon
 
     element :total_results, Integer, :tag => 'TotalResults'
     element :total_pages, Integer, :tag => 'TotalPages'
-    element :products, Ramazon::Product, :tag => "Item", :parser => :sparse, :raw => true
+    has_many :products, 
+      Ramazon::Product,
+      :tag => "Item",
+      :raw => true
   end
 end

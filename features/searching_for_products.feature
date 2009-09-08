@@ -11,4 +11,5 @@ Feature: Search for products
     And I am searching with the "browse_node" of "130"
     When I perform the product search
     Then I should get a list of products
+    And the list of products should have more than 1 product
     And each product should have the "product_group" "DVD"

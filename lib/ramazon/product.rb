@@ -92,8 +92,9 @@ module Ramazon
       else
         options[:operation] ||= "ItemSearch"
         options[:search_index] ||= "Blended"
+        options[:item_page] ||= 1
         res = Ramazon::Request.new(options).submit
-        Ramazon::ProductCollection.create_from_results(options[:page] || 1,options[:per_page] || 10,res)
+        Ramazon::ProductCollection.create_from_results(options[:item_page] || 1, 10, res)
       end
     end
 
@@ -122,11 +123,11 @@ module Ramazon
     end
 
     attr_accessor :xml_doc
-    def self.sparse(xml, options = {})
-      node = XML::Parser.string(xml).parse.root
+    def self.parse(xml, options = {})
+      node = XML::Parser.string(xml.to_s).parse.root
       node.find("//Item").collect do |n|
-        p = parse(xml)
-        p.xml_doc = Nokogiri::XML.parse(xml)
+        p = super(n.to_s)
+        p.xml_doc = Nokogiri::XML.parse(n.to_s)
         p
       end
     end

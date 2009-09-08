@@ -22,6 +22,11 @@ Then /^I should get a list of products$/ do
   @products.should_not be_empty
 end
 
+Then /^the list of products should have more than (\d+) product$/ do |count|
+  @products.should have_at_least(count.to_i + 1).items
+end
+
+
 Then /^each product should have the "([^\"]*)" "([^\"]*)"$/ do |attr, value|
   @products.each do |p|
     p.send(attr).should eql(value)
