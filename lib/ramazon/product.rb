@@ -41,12 +41,12 @@ module Ramazon
   # +original_release_date+::
   #   The original release date of the product
   # @example find an individual item
-  # @products = Ramazon::Product.find(:item_id => "B000NU2CY4", :response_group => "Medium")
-  # @products[0].title
-  # @products[0].asin
-  # @products[0].upc
-  # @products[0].large_image.url
-  # @products[0].url
+  #   @products = Ramazon::Product.find(:item_id => "B000NU2CY4", :response_group => "Medium")
+  #   @products[0].title
+  #   @products[0].asin
+  #   @products[0].upc
+  #   @products[0].large_image.url
+  #   @products[0].url
   #
 
   class Product
