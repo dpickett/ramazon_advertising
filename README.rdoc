@@ -21,6 +21,13 @@ Currently only supports product search and retrieval. Requests are signed proper
   #you can also use a nokogiri search string to get elements that don't have built-in accessors
   @products[0].get("ItemAttributes Actor").collect{|a| a.content}
 
+== What's under the hood?
+
+* HTTParty
+* HappyMapper
+* will_paginate 
+* nokogiri
+
 == Note on Patches/Pull Requests
  
 * Fork the project.
