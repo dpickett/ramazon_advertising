@@ -2,6 +2,7 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require "rubygems"
 
+require "fileutils"
 require "base64"
 require "hmac-sha2"
 require "digest/sha1"
@@ -28,5 +29,6 @@ require "ramazon/image"
 require "ramazon/price"
 require "ramazon/product"
 require "ramazon/product_collection"
+require "ramazon/browse_node"
 
 configatron.ramazon.locale = :us

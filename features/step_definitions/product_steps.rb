@@ -12,6 +12,7 @@ When /^I try to search for the "([^\"]*)" of "([^\"]*)"$/ do |option, value|
 end
 
 Then /^I should get a list of products$/ do
+  raise @error if @error
   @products.should_not be_empty
 end
 
@@ -22,6 +23,7 @@ Then /^each product should have the "([^\"]*)" "([^\"]*)"$/ do |attr, value|
 end
 
 Then /^I should get a product$/ do
+  raise @error if @error
   @product.should_not be_nil
 end
 

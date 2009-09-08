@@ -4,3 +4,4 @@ coverage
 rdoc
 pkg
 features/support/ramazon_advertising.yml
+features/support/root_nodes.yml

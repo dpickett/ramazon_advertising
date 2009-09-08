@@ -1,6 +1,9 @@
 require 'rubygems'
 require 'rake'
 
+require 'lib/ramazon_advertising'
+load File.join(File.dirname(__FILE__), 'lib', 'tasks', 'ramazon.rake')
+
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
