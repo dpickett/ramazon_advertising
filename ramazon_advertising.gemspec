@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ramazon_advertising}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Pickett"]
@@ -45,6 +45,7 @@ Gem::Specification.new do |s|
      "lib/ramazon_advertising.rb",
      "lib/root_nodes.yml",
      "lib/tasks/ramazon.rake",
+     "ramazon_advertising.gemspec",
      "spec/ramazon/configuration_spec.rb",
      "spec/spec_helper.rb"
   ]
