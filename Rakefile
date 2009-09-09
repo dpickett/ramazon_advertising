@@ -18,7 +18,6 @@ begin
     gem.add_dependency("mislav-will_paginate", ">= 2.3.11")
     gem.add_dependency("nokogiri", ">= 1.3.3")
     gem.add_dependency("configatron", ">= 2.4.1")   
-    gem.add_dependency("rails", ">= 2.3.3")
     gem.add_dependency("ruby-hmac", ">= 0.3.2")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
