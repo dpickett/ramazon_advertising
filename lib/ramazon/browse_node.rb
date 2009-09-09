@@ -1,8 +1,18 @@
 module Ramazon
   class BrowseNode
     include HTTParty
+    include HappyMapper
 
+    tag "BrowseNode"
+
+    element :name, String, :tag => "Name"
+    element :node_id, String, :tag => "BrowseNodeId"
+    element :is_category_root, Boolean, :tag => "IsCategoryRoot"
+
+    attr_accessor :child
+    
     DEFAULT_ROOT_FILE = File.join(File.dirname(__FILE__), '..', 'root_nodes.yml')
+
     def self.generate_root_nodes(file_name = DEFAULT_ROOT_FILE)
       if Ramazon::Configuration.locale == :us
         doc = Nokogiri::HTML(get('http://www.amazon.com').body)
@@ -27,6 +37,10 @@ module Ramazon
 
     def self.root_nodes(file_name = DEFAULT_ROOT_FILE)
       @root_nodes ||= File.open(file_name) { |yf| YAML::load(yf) }
+    end
+
+    def self.parse(xml, options = {})
+      super
     end
   end
 end

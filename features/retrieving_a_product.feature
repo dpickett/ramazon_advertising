@@ -7,6 +7,7 @@ Feature: Retrieving a product
     Given I have a valid access key
     And I have a valid secret key
 
+  Scenario: Finding a DVD
     When I try to find the asin "B000NU2CY4"
     Then I should get a product
     And the product should have the "title" "Gladiator [Blu-ray]"
@@ -19,5 +20,13 @@ Feature: Retrieving a product
     And the product should have a "lowest_new_price"
     And the product should have a "new_count"
     And the product should have a "used_count"
-
   
+  Scenario: Finding a Video Game with a deep category tree
+    When I try to find the asin "B001COQW14"
+    Then I should get a product
+    And the product should have a category tree for "Categories"
+
+  Scenario: Finding a Movie with a Genre tree
+    When I try to find the asin "B002CMLIJ6"
+    Then I should get a product
+    And the product should have a category tree for "Genres"

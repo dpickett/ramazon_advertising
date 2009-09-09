@@ -140,5 +140,39 @@ module Ramazon
     def get(*args)
       result = @xml_doc.search(args)
     end
+
+    # returns a hash of category browse nodes from the top down
+    def category_tree
+      @category_tree = {}
+      get_category_browse_nodes.each do |n|
+        build_category_tree(n)
+      end
+      @category_tree
+    end
+
+    private
+    # recursive function used to generate a topdown category tree
+    def build_category_tree(n, child = nil)
+      amz_node = BrowseNode.parse(n.to_s)
+      amz_node.child = child unless child.nil?
+
+      if n.search("./IsCategoryRoot").size > 0
+        @category_tree[amz_node.name] ||= []
+        @category_tree[amz_node.name] << amz_node
+      else
+        parents = n.search("./Ancestors/BrowseNode")
+        if parents.size > 0
+          build_category_tree(parents[0], amz_node)
+        end
+      end
+
+
+    end
+
+    def get_category_browse_nodes
+      self.get("BrowseNodes BrowseNode IsCategoryRoot").collect do |n|
+        n.ancestors("//BrowseNodes/BrowseNode")
+      end
+    end
   end
 end

@@ -1,5 +1,5 @@
 When /^I try to find the asin "([^\"]*)"$/ do |asin|
-  @products = Ramazon::Product.find(:item_id => asin, :response_group => "Medium")
+  @products = Ramazon::Product.find(:item_id => asin, :response_group => ["Medium", "BrowseNodes"])
   @product = @products[0]
 end
 
@@ -44,5 +44,9 @@ end
 
 Then /^the product should have a "([^\"]*)"$/ do |attr|
   @product.send(attr).should_not be_nil
+end
+
+Then /^the product should have a category tree for "([^\"]*)"$/ do |category_name|
+  @product.category_tree[category_name].should_not be_nil
 end
 
