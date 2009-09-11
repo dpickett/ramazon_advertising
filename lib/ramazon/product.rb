@@ -40,6 +40,8 @@ module Ramazon
   #   The release date of the product
   # +original_release_date+::
   #   The original release date of the product
+  # +offers+::
+  #   The collection of offers available for the given product
   # @example find an individual item
   #   @products = Ramazon::Product.find(:item_id => "B000NU2CY4", :response_group => "Medium")
   #   @products[0].title
@@ -68,6 +70,7 @@ module Ramazon
     abstract_element :thumb_image, Ramazon::Image, :tag => "ThumbImage"
     abstract_element :list_price, Ramazon::Price, :tag => "ItemAttributes/ListPrice"
     abstract_element :lowest_new_price, Ramazon::Price, :tag => "OfferSummary/LowestNewPrice"
+    has_many :offers, Ramazon::Offer, :tag => "Offers/Offer"
 
     element :sales_rank, Integer, :tag => "SalesRank"
 

@@ -27,6 +27,9 @@ require "ramazon/request"
 
 require "ramazon/image"
 require "ramazon/price"
+require "ramazon/merchant"
+require "ramazon/offer"
+
 require "ramazon/product"
 require "ramazon/product_collection"
 require "ramazon/browse_node"
