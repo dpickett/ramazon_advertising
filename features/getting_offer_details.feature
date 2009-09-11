@@ -10,6 +10,7 @@ Feature: Retrieving offer details
   Scenario: Getting offers on a DVD
     Given I am searching with the "item_id" of "B000NTPDSW"
     And I am searching with the "response_group" of "Medium,Offers"
+    And I am searching with the "merchant_id" of "All"
     When I perform the product search
     Then I should get a product
     And the product should have "offers"
