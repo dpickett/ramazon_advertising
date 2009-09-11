@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ramazon_advertising}
-  s.version = "0.2.2"
+  s.version = "0.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Pickett"]
-  s.date = %q{2009-09-09}
+  s.date = %q{2009-09-10}
   s.description = %q{TODO: longer description of your gem}
   s.email = %q{dpickett@enlightsolutions.com}
   s.extra_rdoc_files = [
@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "features/friendly_errors.feature",
      "features/generate_root_browse_nodes.feature",
+     "features/getting_offer_details.feature",
      "features/retrieving_a_product.feature",
      "features/searching_for_products.feature",
      "features/step_definitions/auth_steps.rb",
@@ -36,6 +37,8 @@ Gem::Specification.new do |s|
      "lib/ramazon/configuration.rb",
      "lib/ramazon/error.rb",
      "lib/ramazon/image.rb",
+     "lib/ramazon/merchant.rb",
+     "lib/ramazon/offer.rb",
      "lib/ramazon/price.rb",
      "lib/ramazon/product.rb",
      "lib/ramazon/product_collection.rb",
