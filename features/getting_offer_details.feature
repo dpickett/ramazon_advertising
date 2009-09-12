@@ -20,3 +20,11 @@ Feature: Retrieving offer details
     And each of the product's "offers" should have a "sub_condition"
     And the product should have "used_offers"
     And each of the product's "used_offers" should have a "condition" of "Used"
+
+  Scenario: Getting offers by subcondition hash
+    Given I am searching with the "item_id" of "B000NTPDSW"
+    And I am searching with the "response_group" of "Medium,OfferListings"
+    When I perform the product search
+    Then I should get a product
+    And the product should have "offers_by_condition"
+    And the product should have "lowest_offers"

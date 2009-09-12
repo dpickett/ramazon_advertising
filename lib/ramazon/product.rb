@@ -153,6 +153,7 @@ module Ramazon
       @category_tree
     end
 
+    # a sorted list of used offers
     def used_offers
       if @used_offers.nil?
         @used_offers = []
@@ -164,6 +165,90 @@ module Ramazon
         @used_offers.sort!{|a,b| a.price.amount <=> b.price.amount}
       end
       @used_offers
+    end
+
+    # breaks down all the offers in a nested hash of [condition][subcondition]
+    # note: this will load ALL offers into memory
+    # @return [Hash] a nest hash of offers [condition][subcondition] => Array of Ramazon::Offer objects
+    def offers_by_condition
+      @offer_hash = {}
+      offer_page = 1
+      
+      
+      offers = offer_page(offer_page)
+      while offer_page <= offer_pages
+        offers.each do |o|
+          @offer_hash[o.condition.downcase] ||= {}
+          @offer_hash[o.condition.downcase][o.sub_condition] ||= []
+          @offer_hash[o.condition.downcase][o.sub_condition] << o
+        end
+
+        offer_page += 1
+        offers = offer_page(offer_page)
+      end
+
+      @offer_hash
+    end
+
+    # gets the number of offer pages for the specified product
+    # @pram product the Ramazon::Product we want to get offer pages for
+    # @returns [Integer] number of offer pages
+    def self.offer_pages_for(product)
+      if !@offer_pages 
+        offer_page_tags = product.get("//Offers/TotalOfferPages")
+        if offer_page_tags.size > 0
+          offer_pages = offer_page_tags[0].content.to_i
+        else
+          offer_pages = 1
+        end
+      end
+
+      offer_pages
+    end
+
+    # get the lowest offers broken down by subcondition
+    # @return [Hash] a nested hash of prices ie ["new"]["mint"] => Ramazon::Offer
+    def lowest_offers
+      if @lowest_offers.nil?
+        @lowest_offers = {}
+        offers_by_condition.each do |condition, sub_conditions|
+          @lowest_offers[condition] = {}
+          sub_conditions.each do |sub_condition, col|
+            sorted_offers = col.sort{|a,b| a.price.amount.to_i <=> b.price.amount.to_i}
+            @lowest_offers[condition][sub_condition] = sorted_offers.first
+          end
+        end
+      end
+
+      @lowest_offers
+    end
+
+    def offer_pages=(pages)
+      @offer_pages = pages.to_i
+    end
+
+    def offer_pages
+      @offer_pages
+    end
+
+    #get offers from a given page
+    # @param page [Integer] the page number you want to get
+    # @return [Array] Array of Offers returned from the page
+    def offer_page(page = 1)
+      #get all offers
+      products = self.class.find(:item_id => self.asin, 
+        :response_group => "OfferListings",
+        :merchant_id => "All",
+        :condition => "All",
+        :offer_page => page)
+
+      if products
+        product = products[0] 
+        self.offer_pages = self.class.offer_pages_for(product)
+        product.offers
+      else
+        []
+      end
     end
 
     private
