@@ -54,6 +54,14 @@ Then /^each of the product's "([^\"]*)" should have a "([^\"]*)"$/ do |collectio
   end
 end
 
+Then /^each of the product's "([^\"]*)" should have a "([^\"]*)" of "([^\"]*)"$/ do |collection_name, attr, value|
+  @product.send(collection_name).should_not be_empty
+  @product.send(collection_name).each do |i|
+    i.send(attr).should_not be_nil
+  end
+end
+
+
 Then /^the product should have a category tree for "([^\"]*)"$/ do |category_name|
   @product.category_tree[category_name].should_not be_nil
 end

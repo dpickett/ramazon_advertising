@@ -153,6 +153,19 @@ module Ramazon
       @category_tree
     end
 
+    def used_offers
+      if @used_offers.nil?
+        @used_offers = []
+        self.offers.each do |o|
+          if o.condition.downcase == "used"
+            @used_offers << o
+          end
+        end
+        @used_offers.sort!{|a,b| a.price.amount <=> b.price.amount}
+      end
+      @used_offers
+    end
+
     private
     # recursive function used to generate a topdown category tree
     def build_category_tree(n, child = nil)

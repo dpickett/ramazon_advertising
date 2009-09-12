@@ -9,7 +9,8 @@ Feature: Retrieving offer details
 
   Scenario: Getting offers on a DVD
     Given I am searching with the "item_id" of "B000NTPDSW"
-    And I am searching with the "response_group" of "Medium,Offers"
+    And I am searching with the "condition" of "Used"
+    And I am searching with the "response_group" of "Medium,OfferListings"
     And I am searching with the "merchant_id" of "All"
     When I perform the product search
     Then I should get a product
@@ -17,3 +18,5 @@ Feature: Retrieving offer details
     And each of the product's "offers" should have a "price"
     And each of the product's "offers" should have a "condition"
     And each of the product's "offers" should have a "sub_condition"
+    And the product should have "used_offers"
+    And each of the product's "used_offers" should have a "condition" of "Used"
