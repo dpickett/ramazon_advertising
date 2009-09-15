@@ -66,3 +66,10 @@ Then /^the product should have a category tree for "([^\"]*)"$/ do |category_nam
   @product.category_tree[category_name].should_not be_nil
 end
 
+
+Then /^each product should have (a\s)?"([^\"]*)"$/ do |a, attr|
+  @products.each do |p|
+    p.send(attr).should_not be_nil
+  end
+end
+

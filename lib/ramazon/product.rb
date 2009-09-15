@@ -82,6 +82,7 @@ module Ramazon
     element :release_date, Date, :tag => 'ItemAttributes/ReleaseDate'
     element :original_release_date, Date, :tag => 'ItemAttributes/OriginalReleaseDate'
 
+    attr_accessor :has_first_page_of_full_offers
 
     # Creates the worker that performs the delta indexing
     # @param options Amazon request options (you can use an underscore convention) 
@@ -97,10 +98,17 @@ module Ramazon
         options[:search_index] ||= "Blended"
         options[:item_page] ||= 1
         res = Ramazon::Request.new(options).submit
-        Ramazon::ProductCollection.create_from_results(options[:item_page] || 1, 10, res)
+        products = Ramazon::ProductCollection.create_from_results(options[:item_page] || 1, 10, res)
+        if find_options_retrieve_all_offers?(options)
+          products.each do |p|
+            p.has_first_page_of_full_offers = true
+            p.offer_pages = offer_pages_for(p)
+          end
+        end
+        products
       end
     end
-
+ 
     # Performs an item lookup
     # @param item_id the ASIN or UPC you're looking for
     # @options additional Amazon request options (i.e. :response_group)
@@ -174,7 +182,6 @@ module Ramazon
       @offer_hash = {}
       offer_page = 1
       
-      
       offers = offer_page(offer_page)
       while offer_page <= offer_pages
         offers.each do |o|
@@ -191,7 +198,7 @@ module Ramazon
     end
 
     # gets the number of offer pages for the specified product
-    # @pram product the Ramazon::Product we want to get offer pages for
+    # @param [Ramazon::Product] product the we want to get offer pages for
     # @returns [Integer] number of offer pages
     def self.offer_pages_for(product)
       if !@offer_pages 
@@ -236,18 +243,22 @@ module Ramazon
     # @return [Array] Array of Offers returned from the page
     def offer_page(page = 1)
       #get all offers
-      products = self.class.find(:item_id => self.asin, 
-        :response_group => "OfferListings",
-        :merchant_id => "All",
-        :condition => "All",
-        :offer_page => page)
-
-      if products
-        product = products[0] 
-        self.offer_pages = self.class.offer_pages_for(product)
-        product.offers
+      if page == 1 && has_first_page_of_full_offers
+        self.offers 
       else
-        []
+        products = self.class.find(:item_id => self.asin, 
+          :response_group => "OfferListings",
+          :merchant_id => "All",
+          :condition => "All",
+          :offer_page => page)
+
+        if products
+          product = products[0] 
+          self.offer_pages = self.class.offer_pages_for(product)
+          product.offers
+        else
+          []
+        end
       end
     end
 
@@ -274,6 +285,19 @@ module Ramazon
       self.get("BrowseNodes BrowseNode IsCategoryRoot").collect do |n|
         n.ancestors("//BrowseNodes/BrowseNode")
       end
+    end
+
+    def self.find_options_retrieve_all_offers?(options = {})
+      if options[:response_group].is_a?(Array)
+        groups = options[:response_group].join(" ")
+      else
+        groups = options[:response_group] || ""
+      end
+
+      groups =~ /OfferListings/ && 
+        (options[:offer_page].nil? || options[:offer_page].to_i == 1) &&
+        (options[:merchant_id] == "All") &&
+        (options[:condition] == "All")
     end
   end
 end
