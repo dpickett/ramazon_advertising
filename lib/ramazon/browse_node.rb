@@ -7,6 +7,7 @@ module Ramazon
 
     element :name, String, :tag => "Name"
     element :node_id, String, :tag => "BrowseNodeId"
+    element :children, Ramazon::BrowseNode, :tag => "Children/BrowseNode"
     element :is_category_root, Boolean, :tag => "IsCategoryRoot"
 
     attr_accessor :child
@@ -37,6 +38,28 @@ module Ramazon
 
     def self.root_nodes(file_name = DEFAULT_ROOT_FILE)
       @root_nodes ||= File.open(file_name) { |yf| YAML::load(yf) }
+    end
+
+    # find a browse node based on its id
+    # @param node_id [String] the browse node you're looking for
+    # @returns [Ramazon::BrowseNode] the node you're looking for
+    def self.find(node_id)
+      req = Ramazon::Request.new(:operation => "BrowseNodeLookup", :browse_node_id => node_id)
+      res = req.submit
+      parse(res.to_s)[0]
+    end
+
+    # get a hash of name -> child browse_nodes
+    # @returns [Hash] stringified hash of names => Ramazon::BrowseNode objects
+    def child_hash
+      if !@child_hash
+        @child_hash = {}
+        self.children.each do |i|
+          @child_hash[i.name] = i
+        end
+      end
+
+      @child_hash
     end
 
     def self.parse(xml, options = {})

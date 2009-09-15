@@ -6,11 +6,30 @@ Given /^the browse node temporary file doesn't exist$/ do
   FileUtils.rm_f @browse_root_filename
 end
 
+Given /^I want browse node information for the node "([^\"]*)"$/ do |node_id|
+  @node_id = node_id
+end
+
 When /^I retrieve root nodes$/ do
   if @browse_root_filename
     Ramazon::BrowseNode.generate_root_nodes @browse_root_filename
   else
     Ramazon::BrowseNode.generate_root_nodes
+  end
+end
+
+When /^I retrieve the browse node$/ do
+  @node = Ramazon::BrowseNode.find(@node_id)
+end
+
+Then /^the browse node should have a name$/ do
+  @node.name.should_not be_nil
+end
+
+Then /^the browse node should have (a\s)?"(.*)"$/ do |a, attr|
+  @node.send(attr).should_not be_nil
+  if @node.send(attr).respond_to?(:empty?)
+    @node.send(attr).should_not be_empty
   end
 end
 
