@@ -8,3 +8,9 @@ Feature: As a user of the ramazon advertising api
     Then the browse node should have a name
     And the browse node should have "children"
     And the browse node should have a "child_hash"
+
+  Scenario: Fetch "DVD" Node
+    Given I want browse node information for the node "130"
+    When I retrieve the browse node
+    Then the browse node should have a name
+    And the browse node should have "children"

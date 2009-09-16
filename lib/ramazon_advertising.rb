@@ -25,6 +25,10 @@ require "ramazon/configuration"
 require "ramazon/error"
 require "ramazon/request"
 
+require "ramazon/search_bin_parameter"
+require "ramazon/search_bin"
+require "ramazon/search_bin_set"
+
 require "ramazon/image"
 require "ramazon/price"
 require "ramazon/merchant"
