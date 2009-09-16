@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{ramazon_advertising}
-  s.version = "0.3.1"
+  s.version = "0.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Dan Pickett"]
-  s.date = %q{2009-09-15}
+  s.date = %q{2009-09-16}
   s.description = %q{TODO: longer description of your gem}
   s.email = %q{dpickett@enlightsolutions.com}
   s.extra_rdoc_files = [
@@ -26,12 +26,14 @@ Gem::Specification.new do |s|
      "features/friendly_errors.feature",
      "features/generate_root_browse_nodes.feature",
      "features/getting_offer_details.feature",
+     "features/getting_search_bins.feature",
      "features/retrieve_browse_node_information.feature",
      "features/retrieving_a_product.feature",
      "features/searching_for_products.feature",
      "features/step_definitions/auth_steps.rb",
      "features/step_definitions/browse_node_steps.rb",
      "features/step_definitions/error_steps.rb",
+     "features/step_definitions/product_collection_steps.rb",
      "features/step_definitions/product_steps.rb",
      "features/step_definitions/ramazon_advertising_steps.rb",
      "features/support/env.rb",
@@ -48,6 +50,9 @@ Gem::Specification.new do |s|
      "lib/ramazon/product_collection.rb",
      "lib/ramazon/rails_additions.rb",
      "lib/ramazon/request.rb",
+     "lib/ramazon/search_bin.rb",
+     "lib/ramazon/search_bin_parameter.rb",
+     "lib/ramazon/search_bin_set.rb",
      "lib/ramazon/signatory.rb",
      "lib/ramazon_advertising.rb",
      "lib/root_nodes.yml",
