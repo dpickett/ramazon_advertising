@@ -13,9 +13,9 @@ begin
     gem.email = "dpickett@enlightsolutions.com"
     gem.homepage = "http://github.com/dpickett/ramazon_advertising"
     gem.authors = ["Dan Pickett"]
-    gem.add_dependency("jnunemaker-httparty", ">= 0.4.3")
-    gem.add_dependency("jnunemaker-happymapper", ">= 0.2.5")
-    gem.add_dependency("mislav-will_paginate", ">= 2.3.11")
+    gem.add_dependency("httparty", ">= 0.6.1")
+    gem.add_dependency("happymapper", ">= 0.3.2")
+    gem.add_dependency("will_paginate", ">= 2.3.15")
     gem.add_dependency("nokogiri", ">= 1.3.3")
     gem.add_dependency("configatron", ">= 2.4.1")   
     gem.add_dependency("ruby-hmac", ">= 0.3.2")
