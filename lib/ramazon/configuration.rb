@@ -43,8 +43,11 @@ module Ramazon
 
       # get the correct host based on your locale
       def base_uri
-        if locale == :us
+        case locale
+        when :us
           "http://ecs.amazonaws.com"
+        when :uk
+          "http://ecs.amazonaws.co.uk"
         else
           "http://ecs.amazonaws.#{locale}"
         end
