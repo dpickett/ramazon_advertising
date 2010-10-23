@@ -18,4 +18,9 @@ describe Ramazon::Configuration do
     Ramazon::Configuration.locale = :us
     Ramazon::Configuration.base_uri.should =~ /\.com/
   end
+  
+  it "shold use .co.uk for the :uk locale" do
+    Ramazon::Configuration.locale = :uk
+    Ramazon::Configuration.base_uri.should =~ /\.co\.uk/
+  end
 end
